@@ -1,0 +1,1357 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\TeX{\mbox{T\kern-.14em\lower.5ex\hbox{E}\kern-.115em X}}
+    \def\LaTeX{\mbox{L\kern-.325em\raise.21em\hbox{$\scriptstyle{A}$}\kern-.17em}\TeX}
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ChatBot\_Using\_rasa}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    The code block below makes sure that you get some information which you can use for debugging, cleans up the output from unecessary warnings and defines a function which whill print json outputs in a nicely formatted way.
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k+kn}{import} \PY{n+nn}{logging}\PY{o}{,} \PY{n+nn}{io}\PY{o}{,} \PY{n+nn}{json}\PY{o}{,} \PY{n+nn}{warnings}
+        \PY{n}{logging}\PY{o}{.}\PY{n}{basicConfig}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{INFO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{pprint}\PY{p}{(}\PY{n}{o}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} small helper to make dict dumps a bit prettier}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{n}{o}\PY{p}{,} \PY{n}{indent}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+!python pip install -U rasa_nlu
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{rasa\PYZus{}nlu}
+        \PY{k+kn}{import} \PY{n+nn}{sklearn}
+        \PY{k+kn}{import} \PY{n+nn}{spacy}
+        \PY{k+kn}{import} \PY{n+nn}{rasa\PYZus{}core}
+\end{Verbatim}
+
+example : Conversation_1:
+U: Hello.
+B: Hey! I am ThingWorx assistant. How can I help?
+U: what are the machines available
+B: Forklift001,Forklift002,Forklift003,Forklift004,Forklift005,Forklift006
+U: show me about forklift001
+B: to see the status click here : http://www.iotspace.io/Thingworx/Things/Forklift001/Properties
+U: Thanks.
+B: Happy reading.
+U: Goodbye.
+B: Goodbye.
+    \section{Creating the training data for language understanding
+model}\label{creating-the-training-data-for-language-understanding-model}
+
+Lets create some training data here by grouping user messages by their
+intents. The intent describes what the messages mean. Another important
+part of training data are entities - pieces of information which help a
+chatbot understand what specifically a user is asking about. Entities
+are labeled using the markdown link syntex: \href{entity_type}{entity
+value}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{nlu\PYZus{}md} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} intent:greet}
+        \PY{l+s+s2}{\PYZhy{} hey}
+        \PY{l+s+s2}{\PYZhy{} hello there}
+        \PY{l+s+s2}{\PYZhy{} hi}
+        \PY{l+s+s2}{\PYZhy{} hello there}
+        \PY{l+s+s2}{\PYZhy{} good morning}
+        \PY{l+s+s2}{\PYZhy{} good evening}
+        \PY{l+s+s2}{\PYZhy{} moin}
+        \PY{l+s+s2}{\PYZhy{} hey there}
+        \PY{l+s+s2}{\PYZhy{} let}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s go}
+        \PY{l+s+s2}{\PYZhy{} hey dude}
+        \PY{l+s+s2}{\PYZhy{} goodmorning}
+        \PY{l+s+s2}{\PYZhy{} goodevening}
+        \PY{l+s+s2}{\PYZhy{} good afternoon}
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} intent:goodbye}
+        \PY{l+s+s2}{\PYZhy{} cu}
+        \PY{l+s+s2}{\PYZhy{} good by}
+        \PY{l+s+s2}{\PYZhy{} cee you later}
+        \PY{l+s+s2}{\PYZhy{} good night}
+        \PY{l+s+s2}{\PYZhy{} good afternoon}
+        \PY{l+s+s2}{\PYZhy{} bye}
+        \PY{l+s+s2}{\PYZhy{} goodbye}
+        \PY{l+s+s2}{\PYZhy{} have a nice day}
+        \PY{l+s+s2}{\PYZhy{} see you around}
+        \PY{l+s+s2}{\PYZhy{} bye bye}
+        \PY{l+s+s2}{\PYZhy{} see you later}
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} intent:deny}
+        \PY{l+s+s2}{\PYZhy{} no}
+        \PY{l+s+s2}{\PYZhy{} never}
+        \PY{l+s+s2}{\PYZhy{} I don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t think so}
+        \PY{l+s+s2}{\PYZhy{} don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t like that}
+        \PY{l+s+s2}{\PYZhy{} no way}
+        \PY{l+s+s2}{\PYZhy{} not really}
+        \PY{l+s+s2}{\PYZhy{} nope}
+        \PY{l+s+s2}{\PYZhy{} definitely no}
+        \PY{l+s+s2}{\PYZhy{} no no}
+        
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} intent:machine\PYZus{}status}
+        \PY{l+s+s2}{\PYZhy{} what are the machines available}
+        \PY{l+s+s2}{\PYZhy{} list the machines}
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} intent:machine\PYZus{}name}
+        \PY{l+s+s2}{\PYZhy{} show me about [forklift001](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} [forklift002](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} about [forklift002](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} maybe [forklift003](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} about [forklift004](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} for [forklift005](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} about [forklift006](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} maybe about [forklift001](machine\PYZus{}type)}
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} intent:machine\PYZus{}status+machine\PYZus{}name}
+        \PY{l+s+s2}{\PYZhy{} show me the machine status of [forklift002](machine\PYZus{}type)}
+        \PY{l+s+s2}{\PYZhy{} give me the details of [forklift003](machine\PYZus{}type)}
+        
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} intent:thanks}
+        \PY{l+s+s2}{\PYZhy{} thanks}
+        \PY{l+s+s2}{\PYZhy{} thank you}
+        \PY{l+s+s2}{\PYZhy{} thank you very much}
+        \PY{l+s+s2}{\PYZhy{} thanks a lot}
+        \PY{l+s+s2}{\PYZhy{} thank you so much}
+        \PY{l+s+s2}{\PYZhy{} thank you loads}
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{store} nlu\PYZus{}md \PYZgt{} nlu.md
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Writing 'nlu\_md' (str) to file 'nlu.md'.
+
+    \end{Verbatim}
+now we are going to create our nlu model. We can do that by constructing the processing pipeline which defines how structured data is extracted from unstructured user inputs.we are not using any sepcific nlp or nlu packages as our project dosent need those if you want you can use it but it will make your bot more complicated
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{config} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{language: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{en}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{l+s+s2}{pipeline:}
+        \PY{l+s+s2}{\PYZhy{} name: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokenizer\PYZus{}whitespace}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{                              \PYZsh{}defines how unstructured sentences will be tokenized}
+        \PY{l+s+s2}{\PYZhy{} name: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ner\PYZus{}crf}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{                                           \PYZsh{}defines the model which will be used for entity extraction}
+        \PY{l+s+s2}{\PYZhy{} name: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{intent\PYZus{}featurizer\PYZus{}count\PYZus{}vectors}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{                   \PYZsh{}creates sentence representation}
+        \PY{l+s+s2}{\PYZhy{} name: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{intent\PYZus{}classifier\PYZus{}tensorflow\PYZus{}embedding}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{            \PYZsh{}defines a classifier for intent classification}
+        \PY{l+s+s2}{  intent\PYZus{}tokenization\PYZus{}flag: true                            \PYZsh{}sets the flag for intent label tokenization}
+        \PY{l+s+s2}{  intent\PYZus{}split\PYZus{}symbol: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{                                  \PYZsh{}defines the character on which intent labels should be tokenized}
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}} 
+        
+        \PY{o}{\PYZpc{}}\PY{k}{store} config \PYZgt{} config.yml
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Writing 'config' (str) to file 'config.yml'.
+
+    \end{Verbatim}
+
+    \section{Training the Rasa NLU Model}\label{training-the-rasa-nlu-model}
+We're going to train a model to recognise user inputs, so that when you send a message like "hello" to your bot, it will recognise this as a "greet" intent.
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}nlu}\PY{n+nn}{.}\PY{n+nn}{training\PYZus{}data} \PY{k}{import} \PY{n}{load\PYZus{}data}
+        \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}nlu}\PY{n+nn}{.}\PY{n+nn}{config} \PY{k}{import} \PY{n}{RasaNLUModelConfig}
+        \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}nlu}\PY{n+nn}{.}\PY{n+nn}{model} \PY{k}{import} \PY{n}{Trainer}
+        \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}nlu} \PY{k}{import} \PY{n}{config}
+        
+        \PY{c+c1}{\PYZsh{} loading the nlu training samples}
+        \PY{n}{training\PYZus{}data} \PY{o}{=} \PY{n}{load\PYZus{}data}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nlu.md}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} trainer to educate our pipeline}
+        \PY{n}{trainer} \PY{o}{=} \PY{n}{Trainer}\PY{p}{(}\PY{n}{config}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{config.yml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} train the model!}
+        \PY{n}{interpreter} \PY{o}{=} \PY{n}{trainer}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{training\PYZus{}data}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} store it for future use}
+        \PY{n}{model\PYZus{}directory} \PY{o}{=} \PY{n}{trainer}\PY{o}{.}\PY{n}{persist}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./models/nlu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fixed\PYZus{}model\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{current}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:rasa\_nlu.training\_data.loading:Training data format of nlu.md is md
+INFO:rasa\_nlu.training\_data.training\_data:Training data stats: 
+	- intent examples: 51 (7 distinct intents)
+	- Found intents: 'machine\_name', 'machine\_status', 'machine\_status+machine\_name', 'goodbye', 'deny', 'greet', 'thanks'
+	- entity examples: 10 (1 distinct entities)
+	- found entities: 'machine\_type'
+
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `tokenizer\_whitespace`, you should change it to its class name: `WhitespaceTokenizer`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `ner\_crf`, you should change it to its class name: `CRFEntityExtractor`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `intent\_featurizer\_count\_vectors`, you should change it to its class name: `CountVectorsFeaturizer`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `intent\_classifier\_tensorflow\_embedding`, you should change it to its class name: `EmbeddingIntentClassifier`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `tokenizer\_whitespace`, you should change it to its class name: `WhitespaceTokenizer`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `tokenizer\_whitespace`, you should change it to its class name: `WhitespaceTokenizer`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `ner\_crf`, you should change it to its class name: `CRFEntityExtractor`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `ner\_crf`, you should change it to its class name: `CRFEntityExtractor`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `intent\_featurizer\_count\_vectors`, you should change it to its class name: `CountVectorsFeaturizer`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `intent\_featurizer\_count\_vectors`, you should change it to its class name: `CountVectorsFeaturizer`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `intent\_classifier\_tensorflow\_embedding`, you should change it to its class name: `EmbeddingIntentClassifier`.
+WARNING:rasa\_nlu.registry:DEPRECATION warning: your nlu config file contains old style component name `intent\_classifier\_tensorflow\_embedding`, you should change it to its class name: `EmbeddingIntentClassifier`.
+INFO:rasa\_nlu.model:Starting to train component WhitespaceTokenizer
+INFO:rasa\_nlu.model:Finished training component.
+INFO:rasa\_nlu.model:Starting to train component CRFEntityExtractor
+INFO:rasa\_nlu.model:Finished training component.
+INFO:rasa\_nlu.model:Starting to train component CountVectorsFeaturizer
+INFO:rasa\_nlu.model:Finished training component.
+INFO:rasa\_nlu.model:Starting to train component EmbeddingIntentClassifier
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}rasa\_nlu\textbackslash{}classifiers\textbackslash{}embedding\_intent\_classifier.py:285: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+WARNING:tensorflow:From C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}framework\textbackslash{}op\_def\_library.py:263: colocate\_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}rasa\_nlu\textbackslash{}classifiers\textbackslash{}embedding\_intent\_classifier.py:286: dropout (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dropout instead.
+WARNING:tensorflow:From C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}keras\textbackslash{}layers\textbackslash{}core.py:143: calling dropout (from tensorflow.python.ops.nn\_ops) with keep\_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep\_prob`. Rate should be set to `rate = 1 - keep\_prob`.
+WARNING:tensorflow:From C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}ops\textbackslash{}math\_ops.py:3066: to\_int32 (from tensorflow.python.ops.math\_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}ops\textbackslash{}math\_grad.py:102: div (from tensorflow.python.ops.math\_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Deprecated in favor of operator or tf.math.divide.
+INFO:rasa\_nlu.classifiers.embedding\_intent\_classifier:Accuracy is updated every 10 epochs
+Epochs: 100\%|████████████████████████████████████████████████| 300/300 [00:02<00:00, 136.95it/s, loss=0.105, acc=0.980]
+INFO:rasa\_nlu.classifiers.embedding\_intent\_classifier:Finished training embedding classifier, loss=0.105, train accuracy=0.980
+INFO:rasa\_nlu.model:Finished training component.
+INFO:rasa\_nlu.model:Successfully saved model into 'C:\textbackslash{}Users\textbackslash{}sreeram\textbackslash{}Desktop\textbackslash{}chatbot\textbackslash{}models\textbackslash{}nlu\textbackslash{}default\textbackslash{}current'
+
+    \end{Verbatim}
+
+    \section{Writing Stories}\label{writing-stories}
+The training data for dialogue management models is called stories. A story is an actual conversation where user inputs are expressed as intents as well as corresponding entities, and chatbot responses are expressed as actions.
+
+Let's take a look into the format of the stories in more detail:
+
+A story starts with ## and you can give it a name. Lines that start with * are messages sent by the user. Although you don't write the actual message, but rather the intent (and the entities) that represent what the user means. Lines that start with - are actions taken by your bot. In this case all of our actions are just messages sent back to the user, like utter_greet, but in general an action can do anything, including calling an API and interacting with the outside world.
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{stories\PYZus{}md} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} Suggestion path 1}
+        \PY{l+s+s2}{* greet}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}greet}
+        \PY{l+s+s2}{* machine\PYZus{}status}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}list}
+        \PY{l+s+s2}{* machine\PYZus{}name}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{machine\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{forklift001}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}
+        \PY{l+s+s2}{  \PYZhy{} action\PYZus{}machine\PYZus{}link}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}link}
+        \PY{l+s+s2}{* goodbye}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}goodbye}
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} Suggestion path 2}
+        \PY{l+s+s2}{* greet}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}greet}
+        \PY{l+s+s2}{* machine\PYZus{}status+machine\PYZus{}name}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{machine\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{forklift001}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}
+        \PY{l+s+s2}{  \PYZhy{} action\PYZus{}machine\PYZus{}link}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}link}
+        \PY{l+s+s2}{* thanks}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}welcome}
+        \PY{l+s+s2}{* goodbye}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}goodbye}
+        
+        \PY{l+s+s2}{\PYZsh{}\PYZsh{} Suggestion path 3}
+        \PY{l+s+s2}{* greet}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}greet}
+        \PY{l+s+s2}{* machine\PYZus{}name}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{machine\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{forklift001}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}
+        \PY{l+s+s2}{  \PYZhy{} action\PYZus{}machine\PYZus{}link}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}link}
+        \PY{l+s+s2}{* deny}
+        \PY{l+s+s2}{  \PYZhy{} utter\PYZus{}goodbye}
+        
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{store} stories\PYZus{}md \PYZgt{} stories.md
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Done!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Writing 'stories\_md' (str) to file 'stories.md'.
+Done!
+
+    \end{Verbatim}
+
+    \section{Domain}\label{domain}
+Domain is the place where we define all our intents entities and the templates for the answers an assistant should use to respond to the user and slots which will help the assistant to keep track of the context
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{domain\PYZus{}yml} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{intents:}
+        \PY{l+s+s2}{\PYZhy{} greet}
+        \PY{l+s+s2}{\PYZhy{} goodbye}
+        \PY{l+s+s2}{\PYZhy{} thanks}
+        \PY{l+s+s2}{\PYZhy{} deny}
+        \PY{l+s+s2}{\PYZhy{} machine\PYZus{}status+machine\PYZus{}name}
+        \PY{l+s+s2}{\PYZhy{} machine\PYZus{}status}
+        \PY{l+s+s2}{\PYZhy{} machine\PYZus{}name}
+        \PY{l+s+s2}{slots:}
+        \PY{l+s+s2}{  machine\PYZus{}type:}
+        \PY{l+s+s2}{    type: text}
+        \PY{l+s+s2}{    }
+        \PY{l+s+s2}{entities:}
+        \PY{l+s+s2}{\PYZhy{} paper\PYZus{}type}
+        
+        \PY{l+s+s2}{actions:}
+        \PY{l+s+s2}{\PYZhy{} utter\PYZus{}greet}
+        \PY{l+s+s2}{\PYZhy{} utter\PYZus{}goodbye}
+        \PY{l+s+s2}{\PYZhy{} utter\PYZus{}link}
+        \PY{l+s+s2}{\PYZhy{} utter\PYZus{}welcome}
+        \PY{l+s+s2}{\PYZhy{} utter\PYZus{}list}
+        \PY{l+s+s2}{\PYZhy{} action\PYZus{}machine\PYZus{}link}
+        
+        \PY{l+s+s2}{templates:}
+        \PY{l+s+s2}{  utter\PYZus{}greet:}
+        \PY{l+s+s2}{  \PYZhy{} text: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hey! I am ThingWorx assistant. How can I help}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{l+s+s2}{  utter\PYZus{}goodbye:}
+        \PY{l+s+s2}{  \PYZhy{} text: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Have a great day!}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{l+s+s2}{  utter\PYZus{}link:}
+        \PY{l+s+s2}{  \PYZhy{} text: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{to see the status click here : }\PY{l+s+si}{\PYZob{}machine\PYZus{}type\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}
+        \PY{l+s+s2}{  }
+        \PY{l+s+s2}{  utter\PYZus{}welcome:}
+        \PY{l+s+s2}{  \PYZhy{} text: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{It was pleasure serving you}\PY{l+s+s2}{\PYZdq{}}
+        \PY{l+s+s2}{  }
+        \PY{l+s+s2}{  utter\PYZus{}list:}
+        \PY{l+s+s2}{  \PYZhy{} text: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Forklift001,Forklift002,Forklift003,Forklift004,Forklift005,Forklift006}\PY{l+s+s2}{\PYZdq{}}
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{store} domain\PYZus{}yml \PYZgt{} domain.yml
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Writing 'domain\_yml' (str) to file 'domain.yml'.
+
+    \end{Verbatim}
+The responses of the assistant can be more than just simple text responses-we can create links
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{custom\PYZus{}action} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{l+s+s2}{from rasa\PYZus{}sdk import Action}
+        \PY{l+s+s2}{from rasa\PYZus{}sdk.events import SlotSet}
+        
+        \PY{l+s+s2}{import requests}
+        
+        \PY{l+s+s2}{class action\PYZus{}machine\PYZus{}link(Action):}
+        \PY{l+s+s2}{    def name(self):}
+        \PY{l+s+s2}{        return }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{action\PYZus{}machine\PYZus{}link}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{l+s+s2}{    def run(self, dispatcher, tracker, domain):}
+        
+        \PY{l+s+s2}{        machine\PYZus{}type = tracker.get\PYZus{}slot(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{machine\PYZus{}type}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)}
+        \PY{l+s+s2}{        link=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+        \PY{l+s+s2}{        if(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ in machine\PYZus{}type):}
+        \PY{l+s+s2}{            machine\PYZus{}type=list(machine\PYZus{}type)}
+        \PY{l+s+s2}{            machine\PYZus{}type[0]=}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{F}\PY{l+s+s2}{\PYZsq{}}
+        \PY{l+s+s2}{            machine\PYZus{}type=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.join(machine\PYZus{}type)}
+        \PY{l+s+s2}{            link=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://www.iotspace.io/Thingworx/Things/}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{/Properties?apikey=e82d0e47\PYZhy{}9f2a\PYZhy{}42c6\PYZhy{}b6e4\PYZhy{}a9006cdf9b18}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.format(machine\PYZus{}type)}
+        \PY{l+s+s2}{        else:}
+        \PY{l+s+s2}{             dispatcher.utter\PYZus{}message(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wrong machine\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+        \PY{l+s+s2}{        dispatcher.utter\PYZus{}message(machine\PYZus{}type)}
+        \PY{l+s+s2}{        return [SlotSet(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{machine\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,link)]}
+        \PY{l+s+s2}{        }
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{o}{\PYZpc{}}\PY{k}{store} custom\PYZus{}action \PYZgt{} actions.py
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Writing 'custom\_action' (str) to file 'actions.py'.
+
+    \end{Verbatim}
+
+    \section{Training your Dialogue
+Model}\label{training-your-dialogue-model}
+
+    Now we are going to train the dialogue management model. We can specify
+what policies should be used to train it - in this case, the model is a
+neural network implemented in Keras which learns to predict which action
+to take next. We can also change the parameters of what percentage of
+training examples should be used for validation and how many epochs
+should be used for training.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}core}\PY{n+nn}{.}\PY{n+nn}{policies}\PY{n+nn}{.}\PY{n+nn}{keras\PYZus{}policy} \PY{k}{import} \PY{n}{KerasPolicy}
+        \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}core}\PY{n+nn}{.}\PY{n+nn}{agent} \PY{k}{import} \PY{n}{Agent}
+        
+        \PY{n}{agent} \PY{o}{=} \PY{n}{Agent}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{domain.yml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{policies}\PY{o}{=}\PY{p}{[}\PY{n}{KerasPolicy}\PY{p}{(}
+                \PY{n}{validation\PYZus{}split}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,}
+                \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n}{training\PYZus{}data} \PY{o}{=} \PY{n}{agent}\PY{o}{.}\PY{n}{load\PYZus{}data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stories.md}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{agent}\PY{o}{.}\PY{n}{train}\PY{p}{(}
+                \PY{n}{training\PYZus{}data}
+        \PY{p}{)}
+        
+        \PY{n}{agent}\PY{o}{.}\PY{n}{persist}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/dialogue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:apscheduler.scheduler:Scheduler started
+Processed Story Blocks: 100\%|█████████████████████████████████████████████| 3/3 [00:00<00:00, 553.24it/s, \# trackers=1]
+Processed Story Blocks: 100\%|█████████████████████████████████████████████| 3/3 [00:00<00:00, 262.99it/s, \# trackers=3]
+Processed Story Blocks: 100\%|█████████████████████████████████████████████| 3/3 [00:00<00:00, 183.27it/s, \# trackers=3]
+Processed Story Blocks: 100\%|█████████████████████████████████████████████| 3/3 [00:00<00:00, 208.57it/s, \# trackers=3]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+masking (Masking)            (None, 5, 23)             0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm (LSTM)                  (None, 32)                7168      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense (Dense)                (None, 14)                462       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+activation (Activation)      (None, 14)                0         
+=================================================================
+Total params: 7,630
+Trainable params: 7,630
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:rasa\_core.policies.keras\_policy:Fitting model with 48 total samples and a validation split of 0.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/250
+48/48 [==============================] - ETA: 0s - loss: 2.6008 - acc: 0.093 - 1s 13ms/sample - loss: 2.6017 - acc: 0.0625
+Epoch 2/250
+48/48 [==============================] - ETA: 0s - loss: 2.5536 - acc: 0.156 - 0s 320us/sample - loss: 2.5478 - acc: 0.1667
+Epoch 3/250
+48/48 [==============================] - ETA: 0s - loss: 2.5120 - acc: 0.312 - 0s 414us/sample - loss: 2.5121 - acc: 0.3125
+Epoch 4/250
+48/48 [==============================] - ETA: 0s - loss: 2.4904 - acc: 0.312 - 0s 362us/sample - loss: 2.4943 - acc: 0.2917
+Epoch 5/250
+48/48 [==============================] - ETA: 0s - loss: 2.4782 - acc: 0.281 - 0s 382us/sample - loss: 2.4686 - acc: 0.2917
+Epoch 6/250
+48/48 [==============================] - ETA: 0s - loss: 2.4491 - acc: 0.281 - 0s 382us/sample - loss: 2.4323 - acc: 0.3125
+Epoch 7/250
+48/48 [==============================] - ETA: 0s - loss: 2.4054 - acc: 0.375 - 0s 393us/sample - loss: 2.4013 - acc: 0.4375
+Epoch 8/250
+48/48 [==============================] - ETA: 0s - loss: 2.3721 - acc: 0.343 - 0s 341us/sample - loss: 2.3553 - acc: 0.3750
+Epoch 9/250
+48/48 [==============================] - ETA: 0s - loss: 2.3412 - acc: 0.343 - 0s 424us/sample - loss: 2.3378 - acc: 0.3542
+Epoch 10/250
+48/48 [==============================] - ETA: 0s - loss: 2.2959 - acc: 0.312 - 0s 310us/sample - loss: 2.3001 - acc: 0.3542
+Epoch 11/250
+48/48 [==============================] - ETA: 0s - loss: 2.3143 - acc: 0.343 - 0s 362us/sample - loss: 2.2873 - acc: 0.3750
+Epoch 12/250
+48/48 [==============================] - ETA: 0s - loss: 2.2762 - acc: 0.343 - 0s 382us/sample - loss: 2.2539 - acc: 0.3750
+Epoch 13/250
+48/48 [==============================] - ETA: 0s - loss: 2.2502 - acc: 0.343 - 0s 351us/sample - loss: 2.2246 - acc: 0.3750
+Epoch 14/250
+48/48 [==============================] - ETA: 0s - loss: 2.1968 - acc: 0.343 - 0s 372us/sample - loss: 2.1545 - acc: 0.3750
+Epoch 15/250
+48/48 [==============================] - ETA: 0s - loss: 2.1288 - acc: 0.343 - 0s 347us/sample - loss: 2.1096 - acc: 0.3750
+Epoch 16/250
+48/48 [==============================] - ETA: 0s - loss: 2.1298 - acc: 0.343 - 0s 300us/sample - loss: 2.0799 - acc: 0.3750
+Epoch 17/250
+48/48 [==============================] - ETA: 0s - loss: 2.0896 - acc: 0.343 - 0s 300us/sample - loss: 2.0462 - acc: 0.3750
+Epoch 18/250
+48/48 [==============================] - ETA: 0s - loss: 2.0580 - acc: 0.343 - 0s 341us/sample - loss: 2.0149 - acc: 0.3750
+Epoch 19/250
+48/48 [==============================] - ETA: 0s - loss: 2.0335 - acc: 0.343 - 0s 399us/sample - loss: 1.9960 - acc: 0.3750
+Epoch 20/250
+48/48 [==============================] - ETA: 0s - loss: 2.0527 - acc: 0.343 - 0s 362us/sample - loss: 1.9968 - acc: 0.3750
+Epoch 21/250
+48/48 [==============================] - ETA: 0s - loss: 2.0276 - acc: 0.343 - 0s 289us/sample - loss: 1.9708 - acc: 0.3750
+Epoch 22/250
+48/48 [==============================] - ETA: 0s - loss: 1.9491 - acc: 0.343 - 0s 372us/sample - loss: 1.9214 - acc: 0.3750
+Epoch 23/250
+48/48 [==============================] - ETA: 0s - loss: 1.9738 - acc: 0.343 - 0s 362us/sample - loss: 1.9086 - acc: 0.3750
+Epoch 24/250
+48/48 [==============================] - ETA: 0s - loss: 1.9680 - acc: 0.343 - 0s 341us/sample - loss: 1.9029 - acc: 0.3750
+Epoch 25/250
+48/48 [==============================] - ETA: 0s - loss: 1.9102 - acc: 0.343 - 0s 403us/sample - loss: 1.8593 - acc: 0.3750
+Epoch 26/250
+48/48 [==============================] - ETA: 0s - loss: 1.8829 - acc: 0.343 - 0s 320us/sample - loss: 1.8116 - acc: 0.3750
+Epoch 27/250
+48/48 [==============================] - ETA: 0s - loss: 1.8834 - acc: 0.343 - 0s 279us/sample - loss: 1.8155 - acc: 0.3750
+Epoch 28/250
+48/48 [==============================] - ETA: 0s - loss: 1.8948 - acc: 0.343 - 0s 320us/sample - loss: 1.8263 - acc: 0.3750
+Epoch 29/250
+48/48 [==============================] - ETA: 0s - loss: 1.9022 - acc: 0.343 - 0s 382us/sample - loss: 1.8169 - acc: 0.3750
+Epoch 30/250
+48/48 [==============================] - ETA: 0s - loss: 1.8555 - acc: 0.343 - 0s 300us/sample - loss: 1.7848 - acc: 0.3750
+Epoch 31/250
+48/48 [==============================] - ETA: 0s - loss: 1.8724 - acc: 0.343 - 0s 320us/sample - loss: 1.7766 - acc: 0.3750
+Epoch 32/250
+48/48 [==============================] - ETA: 0s - loss: 1.8306 - acc: 0.343 - 0s 362us/sample - loss: 1.7854 - acc: 0.3750
+Epoch 33/250
+48/48 [==============================] - ETA: 0s - loss: 1.8375 - acc: 0.343 - 0s 413us/sample - loss: 1.7486 - acc: 0.3750
+Epoch 34/250
+48/48 [==============================] - ETA: 0s - loss: 1.8166 - acc: 0.343 - 0s 238us/sample - loss: 1.7391 - acc: 0.3750
+Epoch 35/250
+48/48 [==============================] - ETA: 0s - loss: 1.8181 - acc: 0.343 - 0s 341us/sample - loss: 1.7235 - acc: 0.3750
+Epoch 36/250
+48/48 [==============================] - ETA: 0s - loss: 1.8134 - acc: 0.343 - 0s 362us/sample - loss: 1.7104 - acc: 0.3750
+Epoch 37/250
+48/48 [==============================] - ETA: 0s - loss: 1.7622 - acc: 0.343 - 0s 341us/sample - loss: 1.6841 - acc: 0.3750
+Epoch 38/250
+48/48 [==============================] - ETA: 0s - loss: 1.8165 - acc: 0.343 - 0s 279us/sample - loss: 1.7082 - acc: 0.3750
+Epoch 39/250
+48/48 [==============================] - ETA: 0s - loss: 1.7869 - acc: 0.343 - 0s 382us/sample - loss: 1.6901 - acc: 0.3750
+Epoch 40/250
+48/48 [==============================] - ETA: 0s - loss: 1.7540 - acc: 0.343 - 0s 289us/sample - loss: 1.6625 - acc: 0.3750
+Epoch 41/250
+48/48 [==============================] - ETA: 0s - loss: 1.7900 - acc: 0.343 - 0s 300us/sample - loss: 1.6876 - acc: 0.3750
+Epoch 42/250
+48/48 [==============================] - ETA: 0s - loss: 1.7316 - acc: 0.343 - 0s 258us/sample - loss: 1.6401 - acc: 0.3750
+Epoch 43/250
+48/48 [==============================] - ETA: 0s - loss: 1.7458 - acc: 0.343 - 0s 372us/sample - loss: 1.6648 - acc: 0.3750
+Epoch 44/250
+48/48 [==============================] - ETA: 0s - loss: 1.7198 - acc: 0.343 - 0s 248us/sample - loss: 1.6104 - acc: 0.3750
+Epoch 45/250
+48/48 [==============================] - ETA: 0s - loss: 1.7325 - acc: 0.343 - 0s 372us/sample - loss: 1.6250 - acc: 0.3750
+Epoch 46/250
+48/48 [==============================] - ETA: 0s - loss: 1.7374 - acc: 0.343 - 0s 269us/sample - loss: 1.6207 - acc: 0.3750
+Epoch 47/250
+48/48 [==============================] - ETA: 0s - loss: 1.7326 - acc: 0.343 - 0s 248us/sample - loss: 1.6294 - acc: 0.3958
+Epoch 48/250
+48/48 [==============================] - ETA: 0s - loss: 1.6792 - acc: 0.343 - 0s 341us/sample - loss: 1.5802 - acc: 0.3750
+Epoch 49/250
+48/48 [==============================] - ETA: 0s - loss: 1.7060 - acc: 0.343 - 0s 279us/sample - loss: 1.5972 - acc: 0.3958
+Epoch 50/250
+48/48 [==============================] - ETA: 0s - loss: 1.6781 - acc: 0.343 - 0s 362us/sample - loss: 1.5803 - acc: 0.3750
+Epoch 51/250
+48/48 [==============================] - ETA: 0s - loss: 1.6623 - acc: 0.343 - 0s 300us/sample - loss: 1.5643 - acc: 0.3750
+Epoch 52/250
+48/48 [==============================] - ETA: 0s - loss: 1.6557 - acc: 0.343 - 0s 279us/sample - loss: 1.5371 - acc: 0.3958
+Epoch 53/250
+48/48 [==============================] - ETA: 0s - loss: 1.6198 - acc: 0.343 - 0s 279us/sample - loss: 1.5074 - acc: 0.3750
+Epoch 54/250
+48/48 [==============================] - ETA: 0s - loss: 1.6313 - acc: 0.375 - 0s 289us/sample - loss: 1.5241 - acc: 0.4375
+Epoch 55/250
+48/48 [==============================] - ETA: 0s - loss: 1.6094 - acc: 0.343 - 0s 238us/sample - loss: 1.5034 - acc: 0.3750
+Epoch 56/250
+48/48 [==============================] - ETA: 0s - loss: 1.6290 - acc: 0.375 - 0s 300us/sample - loss: 1.5338 - acc: 0.3958
+Epoch 57/250
+48/48 [==============================] - ETA: 0s - loss: 1.5978 - acc: 0.375 - 0s 310us/sample - loss: 1.4856 - acc: 0.4375
+Epoch 58/250
+48/48 [==============================] - ETA: 0s - loss: 1.5726 - acc: 0.343 - 0s 279us/sample - loss: 1.4506 - acc: 0.4375
+Epoch 59/250
+48/48 [==============================] - ETA: 0s - loss: 1.6046 - acc: 0.343 - 0s 269us/sample - loss: 1.4831 - acc: 0.4167
+Epoch 60/250
+48/48 [==============================] - ETA: 0s - loss: 1.5383 - acc: 0.406 - 0s 300us/sample - loss: 1.4385 - acc: 0.4167
+Epoch 61/250
+48/48 [==============================] - ETA: 0s - loss: 1.5383 - acc: 0.375 - 0s 279us/sample - loss: 1.4421 - acc: 0.4375
+Epoch 62/250
+48/48 [==============================] - ETA: 0s - loss: 1.5191 - acc: 0.406 - 0s 320us/sample - loss: 1.4094 - acc: 0.4792
+Epoch 63/250
+48/48 [==============================] - ETA: 0s - loss: 1.4993 - acc: 0.375 - 0s 310us/sample - loss: 1.3941 - acc: 0.4583
+Epoch 64/250
+48/48 [==============================] - ETA: 0s - loss: 1.4908 - acc: 0.406 - 0s 300us/sample - loss: 1.3700 - acc: 0.4792
+Epoch 65/250
+48/48 [==============================] - ETA: 0s - loss: 1.5547 - acc: 0.406 - 0s 289us/sample - loss: 1.4192 - acc: 0.4792
+Epoch 66/250
+48/48 [==============================] - ETA: 0s - loss: 1.4551 - acc: 0.468 - 0s 310us/sample - loss: 1.3451 - acc: 0.5208
+Epoch 67/250
+48/48 [==============================] - ETA: 0s - loss: 1.4713 - acc: 0.437 - 0s 331us/sample - loss: 1.3423 - acc: 0.5208
+Epoch 68/250
+48/48 [==============================] - ETA: 0s - loss: 1.4514 - acc: 0.406 - 0s 310us/sample - loss: 1.3248 - acc: 0.5000
+Epoch 69/250
+48/48 [==============================] - ETA: 0s - loss: 1.4332 - acc: 0.468 - 0s 289us/sample - loss: 1.3161 - acc: 0.5417
+Epoch 70/250
+48/48 [==============================] - ETA: 0s - loss: 1.4411 - acc: 0.468 - 0s 289us/sample - loss: 1.3166 - acc: 0.5417
+Epoch 71/250
+48/48 [==============================] - ETA: 0s - loss: 1.3994 - acc: 0.468 - 0s 310us/sample - loss: 1.2937 - acc: 0.5208
+Epoch 72/250
+48/48 [==============================] - ETA: 0s - loss: 1.4212 - acc: 0.500 - 0s 320us/sample - loss: 1.3318 - acc: 0.5417
+Epoch 73/250
+48/48 [==============================] - ETA: 0s - loss: 1.3683 - acc: 0.468 - 0s 362us/sample - loss: 1.2597 - acc: 0.5208
+Epoch 74/250
+48/48 [==============================] - ETA: 0s - loss: 1.3832 - acc: 0.500 - 0s 362us/sample - loss: 1.2692 - acc: 0.5625
+Epoch 75/250
+48/48 [==============================] - ETA: 0s - loss: 1.3928 - acc: 0.375 - 0s 289us/sample - loss: 1.2936 - acc: 0.4583
+Epoch 76/250
+48/48 [==============================] - ETA: 0s - loss: 1.4146 - acc: 0.375 - 0s 289us/sample - loss: 1.2809 - acc: 0.4792
+Epoch 77/250
+48/48 [==============================] - ETA: 0s - loss: 1.3085 - acc: 0.500 - 0s 273us/sample - loss: 1.2043 - acc: 0.5625
+Epoch 78/250
+48/48 [==============================] - ETA: 0s - loss: 1.3393 - acc: 0.531 - 0s 331us/sample - loss: 1.2115 - acc: 0.5833
+Epoch 79/250
+48/48 [==============================] - ETA: 0s - loss: 1.3171 - acc: 0.531 - 0s 351us/sample - loss: 1.2038 - acc: 0.5833
+Epoch 80/250
+48/48 [==============================] - ETA: 0s - loss: 1.2663 - acc: 0.562 - 0s 279us/sample - loss: 1.1714 - acc: 0.5833
+Epoch 81/250
+48/48 [==============================] - ETA: 0s - loss: 1.2962 - acc: 0.531 - 0s 269us/sample - loss: 1.1943 - acc: 0.5833
+Epoch 82/250
+48/48 [==============================] - ETA: 0s - loss: 1.2956 - acc: 0.531 - 0s 310us/sample - loss: 1.1781 - acc: 0.5833
+Epoch 83/250
+48/48 [==============================] - ETA: 0s - loss: 1.2850 - acc: 0.531 - 0s 289us/sample - loss: 1.1647 - acc: 0.6042
+Epoch 84/250
+48/48 [==============================] - ETA: 0s - loss: 1.2752 - acc: 0.500 - 0s 269us/sample - loss: 1.1639 - acc: 0.5833
+Epoch 85/250
+48/48 [==============================] - ETA: 0s - loss: 1.2167 - acc: 0.593 - 0s 372us/sample - loss: 1.1197 - acc: 0.6458
+Epoch 86/250
+48/48 [==============================] - ETA: 0s - loss: 1.2765 - acc: 0.625 - 0s 300us/sample - loss: 1.1694 - acc: 0.6250
+Epoch 87/250
+48/48 [==============================] - ETA: 0s - loss: 1.2531 - acc: 0.625 - 0s 310us/sample - loss: 1.1626 - acc: 0.6250
+Epoch 88/250
+48/48 [==============================] - ETA: 0s - loss: 1.2302 - acc: 0.531 - 0s 269us/sample - loss: 1.1095 - acc: 0.6250
+Epoch 89/250
+48/48 [==============================] - ETA: 0s - loss: 1.2374 - acc: 0.593 - 0s 258us/sample - loss: 1.1316 - acc: 0.6458
+Epoch 90/250
+48/48 [==============================] - ETA: 0s - loss: 1.1999 - acc: 0.531 - 0s 258us/sample - loss: 1.0917 - acc: 0.5833
+Epoch 91/250
+48/48 [==============================] - ETA: 0s - loss: 1.2217 - acc: 0.562 - 0s 310us/sample - loss: 1.0951 - acc: 0.6250
+Epoch 92/250
+48/48 [==============================] - ETA: 0s - loss: 1.1721 - acc: 0.593 - 0s 320us/sample - loss: 1.0689 - acc: 0.6458
+Epoch 93/250
+48/48 [==============================] - ETA: 0s - loss: 1.1581 - acc: 0.625 - 0s 320us/sample - loss: 1.0447 - acc: 0.6875
+Epoch 94/250
+48/48 [==============================] - ETA: 0s - loss: 1.1384 - acc: 0.656 - 0s 310us/sample - loss: 1.0159 - acc: 0.7292
+Epoch 95/250
+48/48 [==============================] - ETA: 0s - loss: 1.2077 - acc: 0.593 - 0s 310us/sample - loss: 1.0849 - acc: 0.6875
+Epoch 96/250
+48/48 [==============================] - ETA: 0s - loss: 1.0959 - acc: 0.656 - 0s 331us/sample - loss: 1.0064 - acc: 0.7083
+Epoch 97/250
+48/48 [==============================] - ETA: 0s - loss: 1.1168 - acc: 0.625 - 0s 258us/sample - loss: 0.9900 - acc: 0.7083
+Epoch 98/250
+48/48 [==============================] - ETA: 0s - loss: 1.1483 - acc: 0.593 - 0s 310us/sample - loss: 1.0417 - acc: 0.6667
+Epoch 99/250
+48/48 [==============================] - ETA: 0s - loss: 1.1712 - acc: 0.656 - 0s 289us/sample - loss: 1.0317 - acc: 0.7083
+Epoch 100/250
+48/48 [==============================] - ETA: 0s - loss: 1.1080 - acc: 0.656 - 0s 289us/sample - loss: 1.0075 - acc: 0.7292
+Epoch 101/250
+48/48 [==============================] - ETA: 0s - loss: 1.1190 - acc: 0.687 - 0s 279us/sample - loss: 1.0110 - acc: 0.7292
+Epoch 102/250
+48/48 [==============================] - ETA: 0s - loss: 1.0727 - acc: 0.625 - 0s 279us/sample - loss: 0.9676 - acc: 0.7292
+Epoch 103/250
+48/48 [==============================] - ETA: 0s - loss: 1.0881 - acc: 0.687 - 0s 424us/sample - loss: 0.9918 - acc: 0.7083
+Epoch 104/250
+48/48 [==============================] - ETA: 0s - loss: 1.0528 - acc: 0.656 - 0s 300us/sample - loss: 0.9198 - acc: 0.7500
+Epoch 105/250
+48/48 [==============================] - ETA: 0s - loss: 1.0580 - acc: 0.687 - 0s 331us/sample - loss: 0.9543 - acc: 0.7292
+Epoch 106/250
+48/48 [==============================] - ETA: 0s - loss: 1.0263 - acc: 0.718 - 0s 289us/sample - loss: 0.9427 - acc: 0.7500
+Epoch 107/250
+48/48 [==============================] - ETA: 0s - loss: 1.0356 - acc: 0.687 - 0s 300us/sample - loss: 0.9286 - acc: 0.7708
+Epoch 108/250
+48/48 [==============================] - ETA: 0s - loss: 1.0328 - acc: 0.718 - 0s 227us/sample - loss: 0.9327 - acc: 0.7708
+Epoch 109/250
+48/48 [==============================] - ETA: 0s - loss: 1.0110 - acc: 0.750 - 0s 320us/sample - loss: 0.9028 - acc: 0.7917
+Epoch 110/250
+48/48 [==============================] - ETA: 0s - loss: 1.0252 - acc: 0.718 - 0s 258us/sample - loss: 0.9327 - acc: 0.7708
+Epoch 111/250
+48/48 [==============================] - ETA: 0s - loss: 1.0559 - acc: 0.625 - 0s 279us/sample - loss: 0.9270 - acc: 0.6875
+Epoch 112/250
+48/48 [==============================] - ETA: 0s - loss: 0.9695 - acc: 0.750 - 0s 320us/sample - loss: 0.8768 - acc: 0.7917
+Epoch 113/250
+48/48 [==============================] - ETA: 0s - loss: 0.9431 - acc: 0.781 - 0s 258us/sample - loss: 0.8761 - acc: 0.8125
+Epoch 114/250
+48/48 [==============================] - ETA: 0s - loss: 0.9432 - acc: 0.750 - 0s 300us/sample - loss: 0.8473 - acc: 0.8125
+Epoch 115/250
+48/48 [==============================] - ETA: 0s - loss: 0.9475 - acc: 0.750 - 0s 258us/sample - loss: 0.8948 - acc: 0.7708
+Epoch 116/250
+48/48 [==============================] - ETA: 0s - loss: 0.9601 - acc: 0.687 - 0s 351us/sample - loss: 0.8582 - acc: 0.7708
+Epoch 117/250
+48/48 [==============================] - ETA: 0s - loss: 0.9607 - acc: 0.687 - 0s 310us/sample - loss: 0.8757 - acc: 0.7500
+Epoch 118/250
+48/48 [==============================] - ETA: 0s - loss: 0.8918 - acc: 0.812 - 0s 300us/sample - loss: 0.8132 - acc: 0.8542
+Epoch 119/250
+48/48 [==============================] - ETA: 0s - loss: 0.9649 - acc: 0.750 - 0s 351us/sample - loss: 0.8609 - acc: 0.8125
+Epoch 120/250
+48/48 [==============================] - ETA: 0s - loss: 0.9215 - acc: 0.718 - 0s 351us/sample - loss: 0.8273 - acc: 0.7917
+Epoch 121/250
+48/48 [==============================] - ETA: 0s - loss: 0.9119 - acc: 0.781 - 0s 269us/sample - loss: 0.8156 - acc: 0.8333
+Epoch 122/250
+48/48 [==============================] - ETA: 0s - loss: 0.8893 - acc: 0.843 - 0s 351us/sample - loss: 0.8013 - acc: 0.8750
+Epoch 123/250
+48/48 [==============================] - ETA: 0s - loss: 0.8927 - acc: 0.812 - 0s 362us/sample - loss: 0.7879 - acc: 0.8542
+Epoch 124/250
+48/48 [==============================] - ETA: 0s - loss: 0.8419 - acc: 0.875 - 0s 341us/sample - loss: 0.7561 - acc: 0.8958
+Epoch 125/250
+48/48 [==============================] - ETA: 0s - loss: 0.8954 - acc: 0.812 - 0s 341us/sample - loss: 0.7881 - acc: 0.8333
+Epoch 126/250
+48/48 [==============================] - ETA: 0s - loss: 0.8278 - acc: 0.875 - 0s 300us/sample - loss: 0.7459 - acc: 0.8958
+Epoch 127/250
+48/48 [==============================] - ETA: 0s - loss: 0.8756 - acc: 0.781 - 0s 269us/sample - loss: 0.7648 - acc: 0.8333
+Epoch 128/250
+48/48 [==============================] - ETA: 0s - loss: 0.8236 - acc: 0.812 - 0s 300us/sample - loss: 0.7408 - acc: 0.8333
+Epoch 129/250
+48/48 [==============================] - ETA: 0s - loss: 0.8505 - acc: 0.781 - 0s 300us/sample - loss: 0.7909 - acc: 0.8125
+Epoch 130/250
+48/48 [==============================] - ETA: 0s - loss: 0.8423 - acc: 0.812 - 0s 300us/sample - loss: 0.7498 - acc: 0.8542
+Epoch 131/250
+48/48 [==============================] - ETA: 0s - loss: 0.7922 - acc: 0.843 - 0s 331us/sample - loss: 0.7350 - acc: 0.8542
+Epoch 132/250
+48/48 [==============================] - ETA: 0s - loss: 0.8088 - acc: 0.812 - 0s 269us/sample - loss: 0.7404 - acc: 0.8542
+Epoch 133/250
+48/48 [==============================] - ETA: 0s - loss: 0.7485 - acc: 0.906 - 0s 316us/sample - loss: 0.6775 - acc: 0.8958
+Epoch 134/250
+48/48 [==============================] - ETA: 0s - loss: 0.8609 - acc: 0.812 - 0s 300us/sample - loss: 0.7682 - acc: 0.8542
+Epoch 135/250
+48/48 [==============================] - ETA: 0s - loss: 0.8447 - acc: 0.781 - 0s 258us/sample - loss: 0.7374 - acc: 0.8333
+Epoch 136/250
+48/48 [==============================] - ETA: 0s - loss: 0.8050 - acc: 0.843 - 0s 289us/sample - loss: 0.7152 - acc: 0.8750
+Epoch 137/250
+48/48 [==============================] - ETA: 0s - loss: 0.7788 - acc: 0.843 - 0s 269us/sample - loss: 0.6836 - acc: 0.8750
+Epoch 138/250
+48/48 [==============================] - ETA: 0s - loss: 0.7660 - acc: 0.812 - 0s 403us/sample - loss: 0.6998 - acc: 0.8333
+Epoch 139/250
+48/48 [==============================] - ETA: 0s - loss: 0.8015 - acc: 0.843 - 0s 320us/sample - loss: 0.7381 - acc: 0.8542
+Epoch 140/250
+48/48 [==============================] - ETA: 0s - loss: 0.7479 - acc: 0.843 - 0s 372us/sample - loss: 0.6589 - acc: 0.8750
+Epoch 141/250
+48/48 [==============================] - ETA: 0s - loss: 0.7237 - acc: 0.843 - 0s 300us/sample - loss: 0.6713 - acc: 0.8958
+Epoch 142/250
+48/48 [==============================] - ETA: 0s - loss: 0.7706 - acc: 0.843 - 0s 310us/sample - loss: 0.6800 - acc: 0.8750
+Epoch 143/250
+48/48 [==============================] - ETA: 0s - loss: 0.7481 - acc: 0.812 - 0s 289us/sample - loss: 0.6444 - acc: 0.8542
+Epoch 144/250
+48/48 [==============================] - ETA: 0s - loss: 0.6747 - acc: 0.906 - 0s 285us/sample - loss: 0.6165 - acc: 0.9167
+Epoch 145/250
+48/48 [==============================] - ETA: 0s - loss: 0.7590 - acc: 0.812 - 0s 320us/sample - loss: 0.6562 - acc: 0.8542
+Epoch 146/250
+48/48 [==============================] - ETA: 0s - loss: 0.7348 - acc: 0.875 - 0s 289us/sample - loss: 0.6405 - acc: 0.8958
+Epoch 147/250
+48/48 [==============================] - ETA: 0s - loss: 0.7110 - acc: 0.875 - 0s 279us/sample - loss: 0.6318 - acc: 0.9167
+Epoch 148/250
+48/48 [==============================] - ETA: 0s - loss: 0.6788 - acc: 0.875 - 0s 310us/sample - loss: 0.6034 - acc: 0.8958
+Epoch 149/250
+48/48 [==============================] - ETA: 0s - loss: 0.6502 - acc: 0.875 - 0s 300us/sample - loss: 0.6016 - acc: 0.8958
+Epoch 150/250
+48/48 [==============================] - ETA: 0s - loss: 0.7410 - acc: 0.812 - 0s 434us/sample - loss: 0.6409 - acc: 0.8542
+Epoch 151/250
+48/48 [==============================] - ETA: 0s - loss: 0.7048 - acc: 0.812 - 0s 331us/sample - loss: 0.6392 - acc: 0.8542
+Epoch 152/250
+48/48 [==============================] - ETA: 0s - loss: 0.6729 - acc: 0.906 - 0s 300us/sample - loss: 0.6070 - acc: 0.9167
+Epoch 153/250
+48/48 [==============================] - ETA: 0s - loss: 0.7149 - acc: 0.906 - 0s 310us/sample - loss: 0.6155 - acc: 0.9375
+Epoch 154/250
+48/48 [==============================] - ETA: 0s - loss: 0.6209 - acc: 0.906 - 0s 314us/sample - loss: 0.5590 - acc: 0.9375
+Epoch 155/250
+48/48 [==============================] - ETA: 0s - loss: 0.7374 - acc: 0.781 - 0s 320us/sample - loss: 0.6475 - acc: 0.8542
+Epoch 156/250
+48/48 [==============================] - ETA: 0s - loss: 0.6959 - acc: 0.812 - 0s 362us/sample - loss: 0.6146 - acc: 0.8542
+Epoch 157/250
+48/48 [==============================] - ETA: 0s - loss: 0.6432 - acc: 0.875 - 0s 269us/sample - loss: 0.5612 - acc: 0.8958
+Epoch 158/250
+48/48 [==============================] - ETA: 0s - loss: 0.6176 - acc: 0.875 - 0s 300us/sample - loss: 0.5359 - acc: 0.9167
+Epoch 159/250
+48/48 [==============================] - ETA: 0s - loss: 0.6818 - acc: 0.843 - 0s 269us/sample - loss: 0.5900 - acc: 0.8750
+Epoch 160/250
+48/48 [==============================] - ETA: 0s - loss: 0.5875 - acc: 0.906 - 0s 279us/sample - loss: 0.5257 - acc: 0.9375
+Epoch 161/250
+48/48 [==============================] - ETA: 0s - loss: 0.6228 - acc: 0.875 - 0s 279us/sample - loss: 0.5741 - acc: 0.8750
+Epoch 162/250
+48/48 [==============================] - ETA: 0s - loss: 0.5821 - acc: 0.875 - 0s 327us/sample - loss: 0.5260 - acc: 0.8958
+Epoch 163/250
+48/48 [==============================] - ETA: 0s - loss: 0.5834 - acc: 0.906 - 0s 320us/sample - loss: 0.5186 - acc: 0.9167
+Epoch 164/250
+48/48 [==============================] - ETA: 0s - loss: 0.6467 - acc: 0.843 - 0s 217us/sample - loss: 0.5713 - acc: 0.8958
+Epoch 165/250
+48/48 [==============================] - ETA: 0s - loss: 0.6319 - acc: 0.843 - 0s 289us/sample - loss: 0.5366 - acc: 0.8750
+Epoch 166/250
+48/48 [==============================] - ETA: 0s - loss: 0.5850 - acc: 0.843 - 0s 300us/sample - loss: 0.5173 - acc: 0.8958
+Epoch 167/250
+48/48 [==============================] - ETA: 0s - loss: 0.6317 - acc: 0.875 - 0s 279us/sample - loss: 0.5624 - acc: 0.9167
+Epoch 168/250
+48/48 [==============================] - ETA: 0s - loss: 0.5811 - acc: 0.843 - 0s 269us/sample - loss: 0.5151 - acc: 0.8958
+Epoch 169/250
+48/48 [==============================] - ETA: 0s - loss: 0.5135 - acc: 0.906 - 0s 310us/sample - loss: 0.4524 - acc: 0.9375
+Epoch 170/250
+48/48 [==============================] - ETA: 0s - loss: 0.5202 - acc: 0.906 - 0s 310us/sample - loss: 0.4837 - acc: 0.9167
+Epoch 171/250
+48/48 [==============================] - ETA: 0s - loss: 0.5289 - acc: 0.906 - 0s 279us/sample - loss: 0.4728 - acc: 0.9375
+Epoch 172/250
+48/48 [==============================] - ETA: 0s - loss: 0.5051 - acc: 0.906 - 0s 403us/sample - loss: 0.4770 - acc: 0.9167
+Epoch 173/250
+48/48 [==============================] - ETA: 0s - loss: 0.5132 - acc: 0.875 - 0s 289us/sample - loss: 0.4579 - acc: 0.9167
+Epoch 174/250
+48/48 [==============================] - ETA: 0s - loss: 0.5904 - acc: 0.875 - 0s 269us/sample - loss: 0.5085 - acc: 0.9167
+Epoch 175/250
+48/48 [==============================] - ETA: 0s - loss: 0.5446 - acc: 0.843 - 0s 300us/sample - loss: 0.4704 - acc: 0.8958
+Epoch 176/250
+48/48 [==============================] - ETA: 0s - loss: 0.5453 - acc: 0.843 - 0s 248us/sample - loss: 0.4731 - acc: 0.8958
+Epoch 177/250
+48/48 [==============================] - ETA: 0s - loss: 0.5619 - acc: 0.875 - 0s 382us/sample - loss: 0.4919 - acc: 0.8958
+Epoch 178/250
+48/48 [==============================] - ETA: 0s - loss: 0.4972 - acc: 0.906 - 0s 269us/sample - loss: 0.4368 - acc: 0.9375
+Epoch 179/250
+48/48 [==============================] - ETA: 0s - loss: 0.5034 - acc: 0.906 - 0s 310us/sample - loss: 0.4342 - acc: 0.9375
+Epoch 180/250
+48/48 [==============================] - ETA: 0s - loss: 0.5255 - acc: 0.843 - 0s 331us/sample - loss: 0.4518 - acc: 0.8958
+Epoch 181/250
+48/48 [==============================] - ETA: 0s - loss: 0.4808 - acc: 0.875 - 0s 269us/sample - loss: 0.4207 - acc: 0.9167
+Epoch 182/250
+48/48 [==============================] - ETA: 0s - loss: 0.4841 - acc: 0.875 - 0s 300us/sample - loss: 0.4254 - acc: 0.9167
+Epoch 183/250
+48/48 [==============================] - ETA: 0s - loss: 0.4749 - acc: 0.875 - 0s 279us/sample - loss: 0.4127 - acc: 0.9167
+Epoch 184/250
+48/48 [==============================] - ETA: 0s - loss: 0.4773 - acc: 0.906 - 0s 331us/sample - loss: 0.4141 - acc: 0.9375
+Epoch 185/250
+48/48 [==============================] - ETA: 0s - loss: 0.5303 - acc: 0.906 - 0s 331us/sample - loss: 0.4648 - acc: 0.9167
+Epoch 186/250
+48/48 [==============================] - ETA: 0s - loss: 0.4534 - acc: 0.875 - 0s 320us/sample - loss: 0.3974 - acc: 0.9167
+Epoch 187/250
+48/48 [==============================] - ETA: 0s - loss: 0.4522 - acc: 0.906 - 0s 331us/sample - loss: 0.3973 - acc: 0.9375
+Epoch 188/250
+48/48 [==============================] - ETA: 0s - loss: 0.5047 - acc: 0.875 - 0s 320us/sample - loss: 0.4302 - acc: 0.9167
+Epoch 189/250
+48/48 [==============================] - ETA: 0s - loss: 0.4894 - acc: 0.875 - 0s 331us/sample - loss: 0.4355 - acc: 0.9167
+Epoch 190/250
+48/48 [==============================] - ETA: 0s - loss: 0.5454 - acc: 0.843 - 0s 310us/sample - loss: 0.4532 - acc: 0.8750
+Epoch 191/250
+48/48 [==============================] - ETA: 0s - loss: 0.4395 - acc: 0.906 - 0s 341us/sample - loss: 0.3950 - acc: 0.9375
+Epoch 192/250
+48/48 [==============================] - ETA: 0s - loss: 0.4198 - acc: 0.906 - 0s 320us/sample - loss: 0.3668 - acc: 0.9375
+Epoch 193/250
+48/48 [==============================] - ETA: 0s - loss: 0.4824 - acc: 0.843 - 0s 341us/sample - loss: 0.4111 - acc: 0.8750
+Epoch 194/250
+48/48 [==============================] - ETA: 0s - loss: 0.4525 - acc: 0.906 - 0s 310us/sample - loss: 0.3802 - acc: 0.9375
+Epoch 195/250
+48/48 [==============================] - ETA: 0s - loss: 0.4539 - acc: 0.875 - 0s 341us/sample - loss: 0.3987 - acc: 0.9167
+Epoch 196/250
+48/48 [==============================] - ETA: 0s - loss: 0.4631 - acc: 0.875 - 0s 362us/sample - loss: 0.3867 - acc: 0.9167
+Epoch 197/250
+48/48 [==============================] - ETA: 0s - loss: 0.3940 - acc: 0.906 - 0s 310us/sample - loss: 0.3521 - acc: 0.9375
+Epoch 198/250
+48/48 [==============================] - ETA: 0s - loss: 0.4450 - acc: 0.906 - 0s 341us/sample - loss: 0.3859 - acc: 0.9375
+Epoch 199/250
+48/48 [==============================] - ETA: 0s - loss: 0.4062 - acc: 0.906 - 0s 320us/sample - loss: 0.3591 - acc: 0.9375
+Epoch 200/250
+48/48 [==============================] - ETA: 0s - loss: 0.3972 - acc: 0.875 - 0s 279us/sample - loss: 0.3579 - acc: 0.8958
+Epoch 201/250
+48/48 [==============================] - ETA: 0s - loss: 0.4059 - acc: 0.906 - 0s 300us/sample - loss: 0.3460 - acc: 0.9375
+Epoch 202/250
+48/48 [==============================] - ETA: 0s - loss: 0.3507 - acc: 0.906 - 0s 300us/sample - loss: 0.3278 - acc: 0.9375
+Epoch 203/250
+48/48 [==============================] - ETA: 0s - loss: 0.3540 - acc: 0.906 - 0s 310us/sample - loss: 0.3127 - acc: 0.9375
+Epoch 204/250
+48/48 [==============================] - ETA: 0s - loss: 0.3663 - acc: 0.906 - 0s 351us/sample - loss: 0.3228 - acc: 0.9375
+Epoch 205/250
+48/48 [==============================] - ETA: 0s - loss: 0.3863 - acc: 0.875 - 0s 279us/sample - loss: 0.3387 - acc: 0.8958
+Epoch 206/250
+48/48 [==============================] - ETA: 0s - loss: 0.4081 - acc: 0.875 - 0s 299us/sample - loss: 0.3549 - acc: 0.9167
+Epoch 207/250
+48/48 [==============================] - ETA: 0s - loss: 0.3373 - acc: 0.937 - 0s 300us/sample - loss: 0.2975 - acc: 0.9583
+Epoch 208/250
+48/48 [==============================] - ETA: 0s - loss: 0.3556 - acc: 0.937 - 0s 372us/sample - loss: 0.3150 - acc: 0.9583
+Epoch 209/250
+48/48 [==============================] - ETA: 0s - loss: 0.3559 - acc: 0.875 - 0s 331us/sample - loss: 0.3107 - acc: 0.9167
+Epoch 210/250
+48/48 [==============================] - ETA: 0s - loss: 0.3380 - acc: 0.937 - 0s 310us/sample - loss: 0.3024 - acc: 0.9375
+Epoch 211/250
+48/48 [==============================] - ETA: 0s - loss: 0.3856 - acc: 0.937 - 0s 310us/sample - loss: 0.3414 - acc: 0.9375
+Epoch 212/250
+48/48 [==============================] - ETA: 0s - loss: 0.3608 - acc: 0.906 - 0s 300us/sample - loss: 0.3156 - acc: 0.9375
+Epoch 213/250
+48/48 [==============================] - ETA: 0s - loss: 0.3148 - acc: 0.937 - 0s 289us/sample - loss: 0.2879 - acc: 0.9583
+Epoch 214/250
+48/48 [==============================] - ETA: 0s - loss: 0.3213 - acc: 0.906 - 0s 300us/sample - loss: 0.2754 - acc: 0.9375
+Epoch 215/250
+48/48 [==============================] - ETA: 0s - loss: 0.3849 - acc: 0.843 - 0s 300us/sample - loss: 0.3384 - acc: 0.8958
+Epoch 216/250
+48/48 [==============================] - ETA: 0s - loss: 0.3858 - acc: 0.875 - 0s 248us/sample - loss: 0.3336 - acc: 0.8958
+Epoch 217/250
+48/48 [==============================] - ETA: 0s - loss: 0.3427 - acc: 0.875 - 0s 279us/sample - loss: 0.2927 - acc: 0.9167
+Epoch 218/250
+48/48 [==============================] - ETA: 0s - loss: 0.3091 - acc: 0.906 - 0s 300us/sample - loss: 0.2921 - acc: 0.9375
+Epoch 219/250
+48/48 [==============================] - ETA: 0s - loss: 0.3736 - acc: 0.875 - 0s 310us/sample - loss: 0.3083 - acc: 0.9167
+Epoch 220/250
+48/48 [==============================] - ETA: 0s - loss: 0.3165 - acc: 0.937 - 0s 289us/sample - loss: 0.2957 - acc: 0.9375
+Epoch 221/250
+48/48 [==============================] - ETA: 0s - loss: 0.3281 - acc: 0.937 - 0s 217us/sample - loss: 0.3211 - acc: 0.9375
+Epoch 222/250
+48/48 [==============================] - ETA: 0s - loss: 0.4325 - acc: 0.875 - 0s 331us/sample - loss: 0.3512 - acc: 0.9167
+Epoch 223/250
+48/48 [==============================] - ETA: 0s - loss: 0.3691 - acc: 0.875 - 0s 289us/sample - loss: 0.3260 - acc: 0.8958
+Epoch 224/250
+48/48 [==============================] - ETA: 0s - loss: 0.3105 - acc: 0.937 - 0s 300us/sample - loss: 0.2690 - acc: 0.9583
+Epoch 225/250
+48/48 [==============================] - ETA: 0s - loss: 0.3731 - acc: 0.906 - 0s 269us/sample - loss: 0.3061 - acc: 0.9375
+Epoch 226/250
+48/48 [==============================] - ETA: 0s - loss: 0.3201 - acc: 0.875 - 0s 300us/sample - loss: 0.2784 - acc: 0.9167
+Epoch 227/250
+48/48 [==============================] - ETA: 0s - loss: 0.3679 - acc: 0.906 - 0s 269us/sample - loss: 0.3079 - acc: 0.9375
+Epoch 228/250
+48/48 [==============================] - ETA: 0s - loss: 0.2942 - acc: 0.906 - 0s 300us/sample - loss: 0.2549 - acc: 0.9375
+Epoch 229/250
+48/48 [==============================] - ETA: 0s - loss: 0.3111 - acc: 0.968 - 0s 279us/sample - loss: 0.2635 - acc: 0.9792
+Epoch 230/250
+48/48 [==============================] - ETA: 0s - loss: 0.3218 - acc: 0.937 - 0s 320us/sample - loss: 0.2796 - acc: 0.9375
+Epoch 231/250
+48/48 [==============================] - ETA: 0s - loss: 0.2580 - acc: 0.937 - 0s 300us/sample - loss: 0.2346 - acc: 0.9375
+Epoch 232/250
+48/48 [==============================] - ETA: 0s - loss: 0.2748 - acc: 1.000 - 0s 269us/sample - loss: 0.2462 - acc: 1.0000
+Epoch 233/250
+48/48 [==============================] - ETA: 0s - loss: 0.3177 - acc: 0.906 - 0s 279us/sample - loss: 0.2593 - acc: 0.9375
+Epoch 234/250
+48/48 [==============================] - ETA: 0s - loss: 0.2534 - acc: 1.000 - 0s 289us/sample - loss: 0.2197 - acc: 1.0000
+Epoch 235/250
+48/48 [==============================] - ETA: 0s - loss: 0.3296 - acc: 0.906 - 0s 269us/sample - loss: 0.2713 - acc: 0.9375
+Epoch 236/250
+48/48 [==============================] - ETA: 0s - loss: 0.2562 - acc: 1.000 - 0s 300us/sample - loss: 0.2252 - acc: 1.0000
+Epoch 237/250
+48/48 [==============================] - ETA: 0s - loss: 0.3063 - acc: 0.937 - 0s 289us/sample - loss: 0.2612 - acc: 0.9583
+Epoch 238/250
+48/48 [==============================] - ETA: 0s - loss: 0.2844 - acc: 0.906 - 0s 310us/sample - loss: 0.2499 - acc: 0.9167
+Epoch 239/250
+48/48 [==============================] - ETA: 0s - loss: 0.2591 - acc: 0.937 - 0s 279us/sample - loss: 0.2283 - acc: 0.9583
+Epoch 240/250
+48/48 [==============================] - ETA: 0s - loss: 0.3247 - acc: 0.875 - 0s 320us/sample - loss: 0.2648 - acc: 0.9167
+Epoch 241/250
+48/48 [==============================] - ETA: 0s - loss: 0.3910 - acc: 0.843 - 0s 320us/sample - loss: 0.3160 - acc: 0.8958
+Epoch 242/250
+48/48 [==============================] - ETA: 0s - loss: 0.2448 - acc: 0.968 - 0s 300us/sample - loss: 0.2074 - acc: 0.9792
+Epoch 243/250
+48/48 [==============================] - ETA: 0s - loss: 0.2256 - acc: 0.937 - 0s 300us/sample - loss: 0.2048 - acc: 0.9583
+Epoch 244/250
+48/48 [==============================] - ETA: 0s - loss: 0.2796 - acc: 0.937 - 0s 320us/sample - loss: 0.2410 - acc: 0.9583
+Epoch 245/250
+48/48 [==============================] - ETA: 0s - loss: 0.2726 - acc: 0.968 - 0s 289us/sample - loss: 0.2301 - acc: 0.9792
+Epoch 246/250
+48/48 [==============================] - ETA: 0s - loss: 0.2683 - acc: 0.937 - 0s 310us/sample - loss: 0.2350 - acc: 0.9375
+Epoch 247/250
+48/48 [==============================] - ETA: 0s - loss: 0.2628 - acc: 0.937 - 0s 320us/sample - loss: 0.2333 - acc: 0.9375
+Epoch 248/250
+48/48 [==============================] - ETA: 0s - loss: 0.2929 - acc: 0.906 - 0s 310us/sample - loss: 0.2562 - acc: 0.9167
+Epoch 249/250
+48/48 [==============================] - ETA: 0s - loss: 0.2162 - acc: 0.968 - 0s 289us/sample - loss: 0.2310 - acc: 0.9583
+Epoch 250/250
+48/48 [==============================] - ETA: 0s - loss: 0.2242 - acc: 1.000 - 0s 269us/sample - loss: 0.1949 - acc: 1.0000
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:rasa\_core.policies.keras\_policy:Done fitting keras policy model
+INFO:rasa\_core.agent:Model directory models/dialogue exists and contains old model files. All files will be overwritten.
+INFO:rasa\_core.agent:Persisted model to 'C:\textbackslash{}Users\textbackslash{}sreeram\textbackslash{}Desktop\textbackslash{}chatbot\textbackslash{}models\textbackslash{}dialogue'
+
+    \end{Verbatim}
+The code block below defines the webhook configuration of the action server:
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{endpoint} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{action\PYZus{}endpoint:}
+         \PY{l+s+s2}{  url: }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://localhost:5055/webhook}\PY{l+s+s2}{\PYZdq{}}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{o}{\PYZpc{}}\PY{k}{store} endpoint \PYZgt{} endpoints.yml
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Writing 'endpoint' (str) to file 'endpoints.yml'.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}core}\PY{n+nn}{.}\PY{n+nn}{actions} \PY{k}{import} \PY{n}{Action}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{IFrame}
+         \PY{n}{IFrame}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://localhost:8888/terminals/1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{900}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}next run this python \PYZhy{}m rasa\PYZus{}core\PYZus{}sdk.endpoint \PYZhy{}\PYZhy{}actions actions C:\PYZbs{}ProgramData\PYZbs{}Anaconda3\PYZbs{}Lib\PYZbs{}site\PYZhy{}packages}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} <IPython.lib.display.IFrame at 0x1b8f271ec50>
+\end{Verbatim}
+            the path should be the locatoin where you have saved your code (above prompt)now lets talk to our bot
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{import} \PY{n+nn}{IPython}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{clear\PYZus{}output}
+         \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}core}\PY{n+nn}{.}\PY{n+nn}{agent} \PY{k}{import} \PY{n}{Agent}
+         \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}core}\PY{n+nn}{.}\PY{n+nn}{interpreter} \PY{k}{import} \PY{n}{NaturalLanguageInterpreter}
+         \PY{k+kn}{from} \PY{n+nn}{rasa\PYZus{}core}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{EndpointConfig}
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         
+         \PY{n}{messages} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hi! you can chat in this window. Type }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{stop}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ to end the conversation.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{interpreter} \PY{o}{=} \PY{n}{NaturalLanguageInterpreter}\PY{o}{.}\PY{n}{create}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C:/Users/sreeram/Desktop/chatbot/models/nlu/default/current}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{endpoint} \PY{o}{=} \PY{n}{EndpointConfig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://localhost:5055/webhook}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{agent} \PY{o}{=} \PY{n}{Agent}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{models/dialogue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{interpreter}\PY{o}{=}\PY{n}{interpreter}\PY{p}{,} \PY{n}{action\PYZus{}endpoint} \PY{o}{=} \PY{n}{endpoint}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Your bot is ready to talk! Type your messages here or send }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{stop}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+             \PY{n}{a} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if} \PY{n}{a} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{k}{break}
+             \PY{n}{responses} \PY{o}{=} \PY{n}{agent}\PY{o}{.}\PY{n}{handle\PYZus{}text}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{k}{for} \PY{n}{response} \PY{o+ow}{in} \PY{n}{responses}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{response}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}tensorflow\textbackslash{}python\textbackslash{}training\textbackslash{}saver.py:1266: checkpoint\_exists (from tensorflow.python.training.checkpoint\_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+INFO:tensorflow:Restoring parameters from C:/Users/sreeram/Desktop/chatbot/models/nlu/default/current\textbackslash{}component\_3\_EmbeddingIntentClassifier.ckpt
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your bot is ready to talk! Type your messages here or send 'stop'
+hi
+Hey! I am ThingWorx assistant. How can I help
+show me the machine status of forklift001
+Forklift001
+to see the status click here : http://www.iotspace.io/Thingworx/Things/Forklift001/Properties?apikey=e82d0e47-9f2a-42c6-b6e4-a9006cdf9b18
+thank you
+It was pleasure serving you
+stop
+
+    \end{Verbatim}
+this is to evaluate our model
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{pprint}\PY{p}{(}\PY{n}{interpreter}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{forklift001}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{
+  "intent": \{
+    "name": "machine\_name",
+    "confidence": 0.6929658651351929
+  \},
+  "entities": [],
+  "intent\_ranking": [
+    \{
+      "name": "machine\_name",
+      "confidence": 0.6929658651351929
+    \},
+    \{
+      "name": "greet",
+      "confidence": 0.4679192304611206
+    \},
+    \{
+      "name": "goodbye",
+      "confidence": 0.23245006799697876
+    \},
+    \{
+      "name": "deny",
+      "confidence": 0.13156992197036743
+    \},
+    \{
+      "name": "thanks",
+      "confidence": 0.0
+    \},
+    \{
+      "name": "machine\_status+machine\_name",
+      "confidence": 0.0
+    \},
+    \{
+      "name": "machine\_status",
+      "confidence": 0.0
+    \}
+  ],
+  "text": "forklift001",
+  "model": "current",
+  "project": "default"
+\}
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
